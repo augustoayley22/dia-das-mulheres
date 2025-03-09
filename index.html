@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estehrzinha</title>
+  <link rel="icon" href="assets/icon.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+    }
+    /* Container principal */
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Press Start 2P', cursive;
+    }
+    /* Fundo com imagem e opacidade */
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('assets/background.avif');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.7;
+      z-index: 1;
+    }
+    /* Overlay para escurecer */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      opacity: 0.3;
+      z-index: 2;
+    }
+    /* Botão de exclamação no canto superior direito */
+    .top-right-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 50;
+    }
+    .circle {
+      width: 38px;
+      height: 38px;
+      background-color:#3b82f6; /* Cor azul */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .exclamation {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    /* Conteúdo centralizado */
+    .center-content {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .center-content h1 {
+      font-size: 3rem;
+      color: white;
+      margin-bottom: 2rem;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+    /* Botão "Começar" com efeito gradiente */
+    .button {
+      position: relative;
+      width: 120px;
+      height: 40px;
+      background-color: #FF8C00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      left: -4px;
+      top: -1px;
+      margin: auto;
+      width: 128px;
+      height: 48px;
+      border-radius: 10px;
+      background: linear-gradient(-45deg, #FFEB3B 0%, #FFC107 100%);
+      z-index: -10;
+      pointer-events: none;
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .button::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(-45deg, #FFEB3B 0%, #FFC107 100%);
+      transform: translate3d(0, 0, 0) scale(0.95);
+      filter: blur(20px);
+      z-index: -1;
+    }
+    .button:hover::after {
+      filter: blur(30px);
+    }
+    .button:hover::before {
+      transform: rotate(-180deg);
+    }
+    .button:active::before {
+      transform: scale(0.7);
+    }
+    /* Estilos para o modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: black;
+      opacity: 0.5;
+    }
+    .modal-content {
+      position: relative;
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      z-index: 10;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: 0 1rem;
+      text-align: center;
+    }
+    .modal-content h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .modal-content p {
+      color: #4b5563;
+      margin-bottom: 1rem;
+    }
+    .modal-content button {
+      padding: 0.5rem 1rem;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .modal-content button:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Fundo com imagem -->
+    <div class="background"></div>
+    <!-- Overlay escurecendo -->
+    <div class="overlay"></div>
+    
+    <!-- Botão de exclamação no canto superior direito -->
+    <div class="top-right-button">
+      <div id="exclamationButton"  class="circle">
+        <button class="exclamation">!</button>
+      </div>
+    </div>
+    
+    <!-- Conteúdo centralizado -->
+    <div class="center-content">
+      <h1>Bom noite Estherzinha!</h1>
+      <button id="startButton" class="button">Começar</button>
+    </div>
+    
+    <!-- Modal com o Card Personalizado -->
+    <div id="modal" class="modal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <h2>Observações sobre a pagina feita</h2>
+        <p>Não critique muito kkkk. Fiz de coração mas nao sou bom em ui designer web não é meio forte mas fiz algo diferente.</p>
+        <button id="closeModal">Fechar</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.getElementById('modal');
+      const exclamationButton = document.getElementById('exclamationButton');
+      const startButton = document.getElementById('startButton');
+      const closeModal = document.getElementById('closeModal');
+      const modalBackdrop = document.querySelector('.modal-backdrop');
+      
+      // Abre o modal ao clicar no botão de exclamação
+      exclamationButton.addEventListener('click', function() {
+        console.log("Botão clicado!");
+        modal.classList.add('active');
+      });
+      
+      // Redireciona para flowers.html ao clicar em "Começar"
+      startButton.addEventListener('click', function() {
+        window.location.href = 'flower.html';
+      });
+      
+      // Fecha o modal ao clicar no backdrop ou no botão "Fechar"
+      modalBackdrop.addEventListener('click', function() {
+        modal.classList.remove('active');
+      });
+      
+      closeModal.addEventListener('click', function() {
+        modal.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>

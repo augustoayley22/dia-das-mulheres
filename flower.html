@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estehrzinha</title>
+  <link rel="icon" href="assets/icon.png" type="image/x-icon">
+  <!-- Link para o CSS compilado a partir de flower.scss -->
+  <link rel="stylesheet" href="flower.css">
+  <!-- Biblioteca Anime.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <style>
+    /* Reset e estilos básicos */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: hsl(40, 45%, 80%);
+      color: hsl(0, 0%, 15%);
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    /* Container para a animação (colocado mais acima) */
+    .animation-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    svg {
+      width: 80vw;
+      max-width: 35rem;
+      height: auto;
+      display: block;
+    }
+    svg#bee {
+      position: absolute;
+      width: 50px;
+      height: auto;
+    }
+    /* Estilos para o Card */
+    .card {
+      background: #fff;
+      padding: 20px;
+      margin-top: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+    .card h2 {
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      color: #b8200f;
+    }
+    .card p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    .card button {
+      padding: 10px 20px;
+      background: #b8200f;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    .card button:hover {
+      background: #a7180e;
+    }
+  </style>
+</head>
+<body>
+  <!-- Container da animação (posição mais acima) -->
+  <div class="animation-container">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-25 0 150 100" width="150" height="100">
+      <defs>
+        <mask id="mask-petals">
+          <rect width="100" height="100" fill="hsl(0, 0%, 100%)" />
+          <g transform="translate(50 40)">
+            <g class="petals">
+              <circle r="11" fill="hsl(0, 0%, 0%)" />
+            </g>
+          </g>
+        </mask>
+      </defs>
+      <!-- Planta: tronco e folhas em verde -->
+      <g transform="translate(50 98)">
+        <g class="stem" transform="scale(1 1)" fill="green">
+          <g>
+            <g class="leaf" transform="rotate(45)">
+              <path d="M 0 0 c 20 -8 15 -32 0 -42 -15 10 -20 34 0 42" />
+            </g>
+            <g transform="scale(-1 1)">
+              <g class="leaf" transform="rotate(45)">
+                <path d="M 0 0 c 20 -8 15 -32 0 -42 -15 10 -20 34 0 42" />
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+      <!-- Pétalas: círculos em amarelo -->
+      <g mask="url(#mask-petals)">
+        <g transform="translate(50 40)">
+          <g fill="yellow">
+            <g class="petals">
+              <circle transform="translate(0 -14)" r="11" />
+              <circle transform="rotate(72) translate(0 -14)" r="11" />
+              <circle transform="rotate(144) translate(0 -14)" r="11" />
+              <circle transform="rotate(216) translate(0 -14)" r="11" />
+              <circle transform="rotate(288) translate(0 -14)" r="11" />
+            </g>
+          </g>
+        </g>
+      </g>
+      <!-- Caminho usado para a animação do bee -->
+      <path id="path" stroke="none" fill="none" d="M -25 -20 a 30 30 0 0 0 60 0 30 30 0 0 0 -60 0 30 30 0 0 1 -60 0 30 30 0 0 1 60 0" />
+    </svg>
+  
+    <svg id="bee" viewBox="-10.5 -10.5 21 21">
+      <g transform="rotate(90) translate(0 -4)">
+        <g stroke="currentColor">
+          <circle fill="currentColor" r="4" stroke-width="2.5" />
+          <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path transform="rotate(45) translate(0 -4)" d="M 0 0 v -3" />
+            <path transform="rotate(-45) translate(0 -4)" d="M 0 0 v -3" />
+            <g fill="hsl(200, 80%, 90%)">
+              <path transform="rotate(15)" d="M 0 0 h 7 a 3 3 0 0 1 0 6 q -4 0 -7 -6" />
+              <path transform="scale(-1 1) rotate(15)" d="M 0 0 h 7 a 3 3 0 0 1 0 6 q -4 0 -7 -6" />
+            </g>
+            <g fill="hsl(50, 80%, 50%)">
+              <path d="M 0 0 c 2 6 8 10 0 12 -8 -2 -2 -6 0 -12" />
+            </g>
+          </g>
+        </g>
+      </g>
+    </svg>
+  </div>
+  
+  <!-- Card personalizado abaixo da animação -->
+  <div class="card">
+    <h2>Estherzinha</h2>
+     Primeiramente Boa noite! Segundo fiz uma essa pequena pagina, pois que tive uma ideia para lembrar do dia das mulheres para você, pois você teve uma participação muito importnate na minha vida e sou grato por tudo de bom que aconteceu. Principalmente por ter me mostrado o caminho de Deus e desde então estar firme nesse caminho. Agradeço de coração por tudo e te desejo todo sucesso!! Pode contar comigo pelo que precisar .<br><br>
+    <button onclick="proximo()">Próximo</button>
+  </div>
+  
+  <script>
+    // Inicializa a animação usando Anime.js
+    const path = anime.path('#path');
+    const timeline = anime.timeline({
+      easing: 'easeInOutExpo',
+      duration: 1000,
+      complete: () => {
+        anime({
+          targets: '.leaf',
+          rotate: 40,
+          duration: 3000,
+          loop: true,
+          direction: 'alternate',
+          easing: 'easeInOutQuad'
+        });
+        anime({
+          targets: '.petals',
+          scale: 1.05,
+          duration: 6000,
+          loop: true,
+          direction: 'alternate',
+          easing: 'easeInOutQuad'
+        });
+      }
+    });
+    
+    timeline.add({
+      targets: '.stem',
+      scale: [0, 1],
+    });
+    
+    timeline.add({
+      targets: '.leaf',
+      rotate: [0, 45],
+    });
+    
+    timeline.add({
+      targets: '.petals',
+      scale: [0, 1],
+    }, '-=1000');
+    
+    timeline.add({
+      targets: '#bee',
+      opacity: [0, 1],
+    }, '-=750');
+    
+    anime({
+      targets: '#bee',
+      translateX: path('x'),
+      translateY: path('y'),
+      rotate: path('angle'),
+      loop: true,
+      duration: 12500,
+      easing: 'linear'
+    });
+    
+    // Função para ação do botão
+    function proximo() {
+        window.location.href = "flowers.html"; // Redireciona para flowers.html
+    }
+  </script>
+</body>
+</html>
